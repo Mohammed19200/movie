@@ -10,5 +10,6 @@
     ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "json.schemas": [],
-  "json.schemaDownload.enable": false
+  "json.schemaDownload.enable": false,
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }

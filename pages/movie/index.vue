@@ -1,58 +1,44 @@
 <template>
   <div>
     <h1>movie page</h1>
- 
 
-  <div class="flex gap-4">
-    <nuxt-link :to="{ name: 'movie-category', params: { category: 'popular' } }" class="btn">Popular</nuxt-link>
-    <nuxt-link :to="{ name: 'movie-category', params: { category: 'now_playing' } }" class="btn">Now Playing</nuxt-link>
-    <nuxt-link :to="{ name: 'movie-category', params: { category: 'top_rated' } }" class="btn">Top Rated</nuxt-link>
-    <nuxt-link :to="{ name: 'movie-category', params: { category: 'upcoming' } }" class="btn">Upcoming</nuxt-link>
+  <div class="flex !flex-column !flex-wrap !justify-center gap-4 ">
+    <button  class="btn" @click="change ='PopularMovie'"> Popular Movie</button>
+    <button  class="btn" @click="change = 'NowPlaying'">Now Playing</button>
+    <button  class="btn" @click="change = 'UpcomingMovie'">UpcomingMovie</button>
+    <button  class="btn" @click="change = 'TopRated'">Top Rated</button>
   </div>
 
-    <NuxtPage/>
-
+<keep-alive>
+  <component :is="currentComponent" />
+</keep-alive>
 
   </div>
 </template>
 
 <script setup>
 
-import { onMounted } from "vue";
-import { useRouter } from "vue-router";
+import PopularMovies from '@/components/PopularMovie.vue'
+import TopRated from '@/components/TopRated.vue'
+import UpcomingMovie from '@/components/UpcomingMovie.vue'
+import NowPlaying from '@/components/NowPlaying.vue'
 
-const router = useRouter();
-
-onMounted(() => {
-  console.log(router.options.routes);
-});
-
-// const store = useMovieStore();
-// console.log(store);
-
-// const { data: d_NowPlaying, pending: p_NowPlaying, error: e_NowPlaying } = await store.NowPlaying();
-// const { data: d_Popular, pending: p_Popular, error: e_Popular } = await store.Popular();
-// const { data: d_TopRated, pending: p_TopRated, error: e_TopRated } = await store.TopRated();
-// const { data: d_Upcoming, pending: p_Upcoming, error: e_Upcoming } = await store.Upcoming();
-// console.log(d_NowPlaying.value);
-// console.log(d_Popular.value);
-// console.log(d_TopRated.value);
-// console.log(d_TopRated.value);
-// console.log(d_Upcoming.value);
+const change=ref('PopularMovie')
 
 
-// console.log(d_NowPlaying.value);
-// console.log(d_Popular.value);
-// console.log(d_TopRated.value);
-// console.logd_Upcoming.value);
+const currentComponent = computed(() => {
+  switch (change.value) {
+    case 'PopularMovies':
+      return PopularMovies
+    case 'NowPlaying':
+      return NowPlaying
+    case 'TopRated':
+      return TopRated
+    case 'UpcomingMovie':
+      return UpcomingMovie
+    default:
+      return PopularMovies
+  }
+})
 
-// console.log(d_NowPlaying.value);
-// console.log(d_Popular.value);
-// console.log(d_TopRated.value);
-// console.logd_Upcoming.value);
-
-// console.log(d_NowPlaying.value);
-// console.log(d_Popular.value);
-// console.log(d_TopRated.value);
-// console.logd_Upcoming.value);
 </script>
